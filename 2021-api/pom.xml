@@ -11,6 +11,8 @@
 
     <artifactId>2021-api</artifactId>
 
+
+
     <dependencies>
         <dependency>
             <groupId>com.xunce</groupId>
@@ -21,6 +23,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+
+
+
+
     </dependencies>
 
     <!--  打成一个可执行的jar，但是依赖的jar包单独放在lib目录下  -->
@@ -68,7 +75,7 @@
         </build>-->
 
     <!--  打成一个可执行的jar，依赖的jar包放在jar包里面  -->
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -107,6 +114,6 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 </project>
