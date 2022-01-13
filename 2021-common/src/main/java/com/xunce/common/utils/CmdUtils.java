@@ -15,7 +15,7 @@ public class CmdUtils {
             System.out.println("cmd命令不能为空");
             return;
         }
-        // String cmd = "java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT.jar";
+//         cmd = "java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT.jar";
         InputStream in;
         try {
             Process process = Runtime.getRuntime().exec(cmd);
@@ -24,7 +24,7 @@ public class CmdUtils {
 
             String line;
             while((line = reader.readLine()) != null){
-                System.out.println(line);
+                System.out.println(line);//返回值
             }
             int i = process.waitFor();
             System.out.println("等待时间：" + i);// 等待时间
@@ -34,5 +34,9 @@ public class CmdUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        exec("java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT.jar");
     }
 }
