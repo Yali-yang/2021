@@ -11,7 +11,8 @@ public class ClassForNameUtils {
         try {
             Class clazz = Class.forName("com.xunce.common.utils.ClassForNameUtils");
             Method method = clazz.getMethod("test", String.class);
-            method.invoke(clazz.newInstance(), "120120");
+            Object invoke = method.invoke(clazz.newInstance(), "120120");
+            System.out.println(invoke);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -25,7 +26,8 @@ public class ClassForNameUtils {
         }
     }
 
-    public static void test(String name){
+    public static String test(String name){
         System.out.println(name);
+        return "110";
     }
 }
