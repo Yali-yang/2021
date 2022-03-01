@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPoolUtils {
     private volatile static ExecutorService instance = null;
-    public static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(10000);
-    private static Integer corePoolSize = 3;
+    public static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(100);
+    private static Integer corePoolSize = 2;
     private static Integer maximumPoolSize = 4;
 
     private ThreadPoolUtils(){
@@ -28,7 +28,4 @@ public class ThreadPoolUtils {
         }
         return instance;
     }
-
-
-
 }

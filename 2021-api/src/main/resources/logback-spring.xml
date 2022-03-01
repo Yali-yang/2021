@@ -24,6 +24,7 @@
         <appender-ref ref="console"/>
         <appender-ref ref="file"/>
     </root>
-    <logger name="org.springframework.web" level="WARN"/>
-    <logger name="org.springframework.controllers" level="WARN"/>
+    <logger name="org.springframework.web" level="info"/>
+    <logger name="org.springframework.controllers" level="info"/>
+    <logger name="com.xunce.api" level="info"/>
 </configuration>
