@@ -2,6 +2,8 @@ package com.xunce.common.utils;
 
 
 import com.xunce.common.entity.User;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import java.lang.reflect.Field;
 import java.sql.*;
@@ -11,10 +13,15 @@ import java.util.List;
 public class JdbcUtils {
 
     public static void main(String[] args) throws Exception {
+        commons();
+    }
+
+    public static void commons() throws Exception{
         Connection connection = getConnection();
-        List<User> users = commonQuery(connection, User.class, "SELECT BCODE as bccode,ENTRYTIME as entrytime FROM fc_bondip where BONDIPID in(83774, 176935)");
+        QueryRunner runner = new QueryRunner();
+        List<Object[]> query = runner.query(connection, "SELECT * from user", new ArrayListHandler());
+        System.out.println(query);
         connection.close();
-        System.out.println(users);
     }
 
     /**
@@ -113,7 +120,7 @@ public class JdbcUtils {
 
     public static Connection getConnection() throws Exception {
         String driverClass = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://192.168.0.88:53306/xc_ods";
+        String url = "jdbc:mysql://192.168.0.88:53306/caihui";
         String user = "root";
         String password = "mysql.admin.pass";
 

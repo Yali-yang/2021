@@ -4,7 +4,7 @@
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %-5level [%thread] %logger{0} %L : %msg%n</pattern>
+            <pattern>[%level] %date{yyyy-MM-dd HH:mm:ss} %logger{96}:[%line] - %msg%n</pattern>
         </encoder>
     </appender>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -17,7 +17,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d %-5level [%thread] %logger{0} %L : %msg%n</pattern>
+            <pattern>[%level] %date{yyyy-MM-dd HH:mm:ss} %logger{96}:[%line] - %msg%n</pattern>
         </encoder>
     </appender>
     <root level="info">

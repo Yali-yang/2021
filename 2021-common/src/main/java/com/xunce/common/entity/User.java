@@ -1,34 +1,34 @@
 package com.xunce.common.entity;
 
 public class User {
-    String bccode;
-    String entrytime;
+    Integer id;
+    String name;
 
     public User() {
     }
 
 
-    public String getBccode() {
-        return bccode;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBccode(String bccode) {
-        this.bccode = bccode;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getEntrytime() {
-        return entrytime;
+    public String getName() {
+        return name;
     }
 
-    public void setEntrytime(String entrytime) {
-        this.entrytime = entrytime;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "bccode='" + bccode + '\'' +
-                ", entrytime='" + entrytime + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

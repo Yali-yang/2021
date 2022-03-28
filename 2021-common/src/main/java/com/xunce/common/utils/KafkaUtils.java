@@ -6,6 +6,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -63,8 +64,8 @@ public class KafkaUtils {
         props.put("sasl.kerberos.service.name", "kafka");
         KafkaConsumer kafkaConsumer = new KafkaConsumer<>(props);
         kafkaConsumer.subscribe(Arrays.asList(topic));
-        ConsumerRecords<String, String> records = kafkaConsumer.poll(1);
         while(true){
+            ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofSeconds(1));
             for (ConsumerRecord<String, String> record : records)
                 System.out.println("Partition: " + record.partition() + " Offset: " + record.offset() + " Value: " + record.value() + " ThreadID: " + Thread.currentThread().getId());
             kafkaConsumer.close();
