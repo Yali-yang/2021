@@ -17,11 +17,19 @@
         <lombok.version>1.18.6</lombok.version>
         <mysql.connector.version>8.0.16</mysql.connector.version>
         <druid.version>1.1.14</druid.version>
+        <spring.boot.version>2.1.18.RELEASE</spring.boot.version>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -79,5 +87,23 @@
     <modules>
         <module>2021-common</module>
         <module>2021-api</module>
+        <module>2021-sharding</module>
     </modules>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source >
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
