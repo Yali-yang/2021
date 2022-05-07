@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public class OrderPizza {
 
-	AbsFactory factory;
+	AbsFactory factory;// 聚合进来抽象的工厂
 
 	// 构造器
 	public OrderPizza(AbsFactory factory) {
