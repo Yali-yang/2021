@@ -14,6 +14,8 @@ import java.util.Set;
 
 public class Test {
     private static Logger logger = LoggerFactory.getLogger(Test.class);
+    public static String shell_path_linux = "/tmp/dolphinscheduler";
+    public static String shell_path_windows = "D:\\tmp";
 
     /**
      * 这是一个复杂的指向shell命令的方法
@@ -25,7 +27,7 @@ public class Test {
     public static void main(String[] args) throws Exception{
         // 构建执行命令
         String rawScript = buildRawScript("C:\\Users\\tmp\\aaa.excel", "C:\\Users\\hdfs\\aaa.excel", "C:\\Users\\tmp\\json", "UTF-8");
-        rawScript = "java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT.jar";
+        rawScript = "java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT-jar-with-dependencies.jar";
         String fileName = buildCommand(rawScript);
         System.out.println("fileName:" + fileName);
         AbstractCommandExecutor executor = new AbstractCommandExecutor() {
@@ -39,7 +41,10 @@ public class Test {
 
     public static String buildCommand(String rawScript) throws Exception {
 
-        File file = File.createTempFile("shell", OSUtils.isWindows() ? ".bat" : ".sh");
+        String fileNodeName = String.format("%s/%s_node.%s",
+                OSUtils.isWindows() ? Test.shell_path_windows : Test.shell_path_linux, System.currentTimeMillis() + "",OSUtils.isWindows() ? "bat" : "sh");
+
+        File file = new File(fileNodeName);
 
         Path path = file.toPath();
 
@@ -55,9 +60,11 @@ public class Test {
 
         Set<PosixFilePermission> perms = PosixFilePermissions.fromString(ShellConstants.RWXR_XR_X);
         FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(perms);
-
-        if (!OSUtils.isWindows()) {
-            Files.setPosixFilePermissions(path, attr.value());
+        // 在Linux下，new File(fileNodeName)不会去生成文件，需要调用Files.createFile去创建文件
+        if (OSUtils.isWindows()) {
+            Files.createFile(path);
+        } else {
+            Files.createFile(path, attr);
         }
 
         Files.write(path, rawScript.getBytes());

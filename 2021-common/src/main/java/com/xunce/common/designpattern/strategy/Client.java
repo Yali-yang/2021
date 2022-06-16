@@ -1,5 +1,11 @@
 package com.xunce.common.designpattern.strategy;
 
+/**
+ * 策略模式
+ * 1.把鸭子的行为，飞翔这个能力抽象出来，聚合到具体的鸭子实体中
+ * 2.赋值给具体的实现类
+ *
+ */
 public class Client {
 
 	public static void main(String[] args) {

@@ -1,23 +1,39 @@
 package com.xunce.api;
 
-import com.xunce.common.utils.LogUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.xmlbeans.ResourceLoader;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    @Test
+    public void test(){
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("bean.properties");
+        Properties properties = new Properties();
 
-    public static void main(String[] args) {
-        LogUtils.initLogback("D:\\work\\workSpace\\Yung\\2021\\2021-api\\src\\main\\resources\\logback-spring.xml");
-        logger.info("测试自定义输出日志");
-        System.out.println("Hello java -jar");
-        if (args == null || args.length <= 0) {
-            System.out.println("args为空");
-        } else {
-            System.out.println("args不为空");
-            for (String str : args) {
-                System.out.println(str);
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+
+        System.out.println("properties" + JSON.toJSONString(properties));
+
     }
+
+
+    public static void main(String[] args) {
+    }
+
+
 }

@@ -10,7 +10,7 @@ package com.xunce.common.designpattern.factory.absfactory.pizzastore.order;
  * 		工厂根据我传入的orderType生成对应的披萨给我
  *
  * 	总结：
- * 		1.不是接口接口就是抽象类，增加扩展性
+ * 		1.不是接口就是抽象类，增加扩展性，不要继承
  * 		2.简单工厂模式是直接通过一个类返回对象
  * 			抽象工厂模式是把工厂再抽象一层。全部面向接口编程
  *

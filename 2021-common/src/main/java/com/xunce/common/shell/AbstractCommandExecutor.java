@@ -151,6 +151,22 @@ public abstract class AbstractCommandExecutor {
         return result;
     }
 
+    public void deleteFile(String... fileNames){
+        try{
+            for(String fileName : fileNames){
+                if(fileName != null){
+                    File file = new File(fileName);
+                    if(file.exists()){
+                        file.delete();
+                    }
+                }
+            }
+        }catch (Exception e){
+            logger.info("删除调用txt脚本出现异常", e);
+        }
+    }
+
+
 
     protected String commandInterpreter() {
         return OSUtils.isWindows() ? CMD : SH;
@@ -238,6 +254,7 @@ public abstract class AbstractCommandExecutor {
 
     protected void createCommandFileIfNotExists(String execCommand, String commandFile) throws IOException {
         // create if non existence
+        logger.info("cat execCommand file:{}", execCommand);
         logger.info("create command file:{}", commandFile);
 
         StringBuilder sb = new StringBuilder();
