@@ -45,11 +45,11 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.apache.tomcat.embed</groupId>-->
+<!--                <artifactId>tomcat-embed-core</artifactId>-->
+<!--                <version>${tomcat.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -87,7 +87,8 @@
     <modules>
         <module>2021-common</module>
         <module>2021-api</module>
-<!--        <module>2021-sharding</module>-->
+        <module>2021-web</module>
+        <!--        <module>2021-sharding</module>-->
     </modules>
 
 
