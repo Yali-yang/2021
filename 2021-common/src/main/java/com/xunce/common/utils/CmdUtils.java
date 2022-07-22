@@ -1,5 +1,7 @@
 package com.xunce.common.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +10,32 @@ import java.io.InputStreamReader;
 /**
  * 调用cmd命令
  */
+@Slf4j
 public class CmdUtils {
+
+    public static String execCurl(String[] cmds) {
+        String sbss = "";
+        for(int i=0;i<cmds.length;i++){
+            sbss+=cmds[i];
+        }
+        log.info("准备开始执行cmd命令 ：{}", sbss);
+        ProcessBuilder process = new ProcessBuilder(cmds);
+        Process p;
+        try {
+            p = process.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+            }
+            return builder.toString();
+        } catch (IOException e) {
+            log.info("执行开始执行cmd命令cmd异常，" ,e);
+            return null;
+        }
+    }
 
     public static void exec(String cmd){
         if(null == cmd || cmd.trim().length() <= 0){
