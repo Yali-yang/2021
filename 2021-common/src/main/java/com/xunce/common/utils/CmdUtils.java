@@ -36,7 +36,7 @@ public class CmdUtils {
         } catch (Exception e) {
             log.info("创建sh脚本失败。。 e = {}", e);
         }
-        log.info("准备开始执行sh命令 sh脚本创建成功，开始执行  方法3 ：filePagt = {} ,, path = {}", filePath, path.getFileName());
+        log.info("准备开始执行sh命令 sh脚本创建成功，开始执行  方法3 ：filePath = {} , path = {}", filePath, path.getFileName());
         CmdUtils.exec("sh " + filePath);
         log.info("执行sh命令 执行完成  方法3 ：filePath = {} ,path = {}", filePath, path.getFileName());
 
