@@ -2,16 +2,47 @@ package com.xunce.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * 调用cmd命令
  */
 @Slf4j
 public class CmdUtils {
+
+    /**
+     *  1.生成sh文件
+     *  2.将命令写入sh文件
+     *  3.sh 调用命令文件
+     *  4.删除sh文件
+     * @param cmd
+     */
+    public static void execSh(String cmd){
+        // cmd = "java -jar D:\\work\\workSpace\\Yung\\2021\\2021-api\\target\\2021-api-1.0-SNAPSHOT.jar";
+        String filePath = "/tmp/sms_" + System.currentTimeMillis() + ".sh";
+        File cmdFile = new File(filePath);
+        Path path = Paths.get(filePath);
+        log.info("准备开始执行sh命令  方法3 ：filePath = {} ,path = {}", filePath, path.getFileName());
+        try {
+            cmdFile.createNewFile();
+            cmdFile.setReadable(true, true);
+            cmdFile.setWritable(true, true);
+            cmdFile.setExecutable(true, true);
+            Files.write(path, cmd.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            log.info("创建sh脚本失败。。 e = {}", e);
+        }
+        log.info("准备开始执行sh命令 sh脚本创建成功，开始执行  方法3 ：filePagt = {} ,, path = {}", filePath, path.getFileName());
+        CmdUtils.exec("sh " + filePath);
+        log.info("执行sh命令 执行完成  方法3 ：filePath = {} ,path = {}", filePath, path.getFileName());
+
+        cmdFile.delete();
+
+    }
 
     public static String execCurl(String[] cmds) {
         String sbss = "";
