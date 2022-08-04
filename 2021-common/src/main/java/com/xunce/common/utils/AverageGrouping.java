@@ -1,5 +1,7 @@
 package com.xunce.common.utils;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.stream.Stream;
 public class AverageGrouping {
 
     public static void main(String[] args) {
+        // 方式1
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26);
         int limit = (list.size() - 1) / 10 + 1;
         List<List<Integer>> averageList = new ArrayList<>();
@@ -24,6 +27,18 @@ public class AverageGrouping {
         );
         // [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [11, 12, 13, 14, 15, 16, 17, 18, 19, 20], [21, 22, 23, 24, 25, 26]]
         System.out.println(averageList);
+        // 方式2
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(2);
+        objects.add(2);
+        objects.add(2);
+        objects.add(2);
+        objects.add(2);
+        objects.add(2);
+        objects.add(2);
+        List<List<Object>> partition = Lists.partition(objects, 3);
+        // [[2, 2, 2], [2, 2, 2], [2]]
+        System.out.println(partition);
     }
 
 }

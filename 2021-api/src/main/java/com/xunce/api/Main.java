@@ -1,38 +1,23 @@
 package com.xunce.api;
 
-
-import com.alibaba.fastjson.JSON;
-import org.apache.xmlbeans.ResourceLoader;
+import com.google.common.base.Strings;
+import com.google.common.io.Files;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.math.BigDecimal;
 
 public class Main {
     @Test
     public void test(){
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("bean.properties");
-        Properties properties = new Properties();
-
-        try {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println("properties" + JSON.toJSONString(properties));
-
+        String str = "%s/%s/%s";
+        String format = String.format(str, "a", "b", 1);
+        System.out.println(str);
+        System.out.println(format);
     }
 
 
     public static void main(String[] args) {
+        BigDecimal bigDecimal = BigDecimal.valueOf(0.02);
     }
 
 
