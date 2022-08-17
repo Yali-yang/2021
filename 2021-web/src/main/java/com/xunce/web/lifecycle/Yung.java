@@ -1,9 +1,7 @@
-package com.xunce.web.entity;
+package com.xunce.web.lifecycle;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 /**
  * bean的初始化过程

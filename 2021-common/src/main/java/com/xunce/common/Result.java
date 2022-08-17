@@ -1,91 +1,51 @@
 package com.xunce.common;
 
+import com.xunce.common.enums.ResultEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Result<T> {
-    /**
-     * status
-     */
     private Integer code;
-
-    /**
-     * message
-     */
-    private String msg;
-
-    /**
-     * data
-     */
+    private String message;
     private T data;
 
-    public Result() {
+    public static <T> Result<T> success() {
+        return new Result<>(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), null);
     }
 
-    public Result(Integer code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-    private Result(T data) {
-        this.code  = 0;
-        this.data = data;
-    }
-
-
-    /**
-     * Call this function if there is success
-     *
-     * @param data data
-     * @param <T> type
-     * @return resule
-     */
     public static <T> Result<T> success(T data) {
-        return new Result<>(data);
+        return new Result<>(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), data);
     }
 
-    /**
-     * Call this function if there is any error
-     *
-     * @param msg
-     * @return result
-     */
-    public static Result error(String msg) {
-        return new Result(1 ,msg);
+    public static <T> Result<T> success(String message, T data) {
+        return new Result<>(ResultEnum.SUCCESS.getCode(), message, data);
     }
 
-
-    public Integer getCode() {
-        return code;
+    public static Result<?> failed() {
+        return new Result<>(ResultEnum.COMMON_FAILED.getCode(), ResultEnum.COMMON_FAILED.getMessage(), null);
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
+    public static Result<?> failed(String message) {
+        return new Result<>(ResultEnum.COMMON_FAILED.getCode(), message, null);
     }
 
-    public String getMsg() {
-        return msg;
+    public static Result<?> failed(Integer code, String message) {
+        return new Result<>(code, message, null);
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public static Result<?> failed(ResultEnum errorResult) {
+        return new Result<>(errorResult.getCode(), errorResult.getMessage(), null);
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public boolean isSuccess(){
-        return this.code != null && this.code == 0;
-    }
-
-    @Override
-    public String toString() {
-        return "Status{" +
-                "code='" + code + '\'' +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
+    public static <T> Result<T> instance(Integer code, String message, T data) {
+        Result<T> result = new Result<>();
+        result.setCode(code);
+        result.setMessage(message);
+        result.setData(data);
+        return result;
     }
 }

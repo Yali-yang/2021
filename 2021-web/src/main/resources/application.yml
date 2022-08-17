@@ -1,2 +1,8 @@
 server:
   port: 4401
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    max-history: 30
+    max-size: 30MB
+  path: logs/

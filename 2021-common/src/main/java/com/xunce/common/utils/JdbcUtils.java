@@ -1,7 +1,6 @@
 package com.xunce.common.utils;
 
 
-import com.xunce.common.entity.User;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 

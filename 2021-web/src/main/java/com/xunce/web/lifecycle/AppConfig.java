@@ -1,4 +1,4 @@
-package com.xunce.web.entity;
+package com.xunce.web.lifecycle;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

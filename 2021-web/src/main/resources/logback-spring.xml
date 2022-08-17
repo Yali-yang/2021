@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <!--
+        配置说明 日志按照日志等级分目录存放
+        DEBUG：存放debug级别日志
+        INFO: 存放INFO级别日志
+        WARN：存放WARN级别日志
+        ERROR:存放ERROR级别日志
+        ALL:存放所有级别日志
+    -->
+    <property name="FILE_XC_LOG_PATTERN" value="${FILE_XC_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} [%X{XC_LOG_TRACK_ID:- }] ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="CONSOLE_XC_LOG_PATTERN" value="${CONSOLE_XC_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} [%clr(%X{XC_LOG_TRACK_ID:- }){magenta}] %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- 日志存放路径 -->
+    <property name="LOG_HOME" value="/logs/2021-web"/>
+    <!--日志历史数据保留天数属性   单位：天-->
+    <property name="MAX_DEBUG_HISTORY" value="30"/>
+    <property name="MAX_INFO_HISTORY" value="30"/>
+    <property name="MAX_WARN_HISTORY" value="30"/>
+    <property name="MAX_ERROR_HISTORY" value="30"/>
+    <!--<property name="MAX_ALL_HISTORY" value="30"/>-->
+
+    <!--单个日志文件最大容量属性 -->
+    <property name="MAX_DEBUG_FILESIZE" value="100MB"/>
+    <property name="MAX_INFO_FILESIZE" value="100MB"/>
+    <property name="MAX_WARN_FILESIZE" value="100MB"/>
+    <property name="MAX_ERROR_FILESIZE" value="100MB"/>
+    <!--<property name="MAX_ALL_FILESIZE" value="300MB"/>-->
+
+    <!--日志文件的总大小的最大值属性 -->
+    <property name="MAX_DEBUG_TOTAL_SIZE" value="10GB"/>
+    <property name="MAX_INFO_TOTAL_SIZE" value="10GB"/>
+    <property name="MAX_WARN_TOTAL_SIZE" value="10GB"/>
+    <property name="MAX_ERROR_TOTAL_SIZE" value="10GB"/>
+    <!--<property name="MAX_ALL_TOTAL_SIZE" value="30GB"/>-->
+
+    <!--<include resource="org/springframework/boot/logging/logback/console-appender.xml" />-->
+    <jmxConfigurator/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_XC_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日志文件 -->
+    <appender name="DEBUG-FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/debug/logback_debug.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${FILE_XC_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/debug/logback_debug-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>${MAX_DEBUG_FILESIZE}</maxFileSize>
+            <maxHistory>${MAX_DEBUG_HISTORY}</maxHistory>
+            <totalSizeCap>${MAX_DEBUG_TOTAL_SIZE}</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="INFO-FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/info/logback_info.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${FILE_XC_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/info/logback_info-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>${MAX_INFO_FILESIZE}</maxFileSize>
+            <maxHistory>${MAX_INFO_HISTORY}</maxHistory>
+            <totalSizeCap>${MAX_INFO_TOTAL_SIZE}</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="WARN-FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/warn/logback_warn.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${FILE_XC_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/warn/logback_warn-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>${MAX_WARN_FILESIZE}</maxFileSize>
+            <maxHistory>${MAX_WARN_HISTORY}</maxHistory>
+            <totalSizeCap>${MAX_WARN_TOTAL_SIZE}</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="ERROR-FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/error/logback_error.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${FILE_XC_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/error/logback_error-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>${MAX_ERROR_FILESIZE}</maxFileSize>
+            <maxHistory>${MAX_ERROR_HISTORY}</maxHistory>
+            <totalSizeCap>${MAX_ERROR_TOTAL_SIZE}</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--开发环境or测试环境 -->
+    <logger name="com.xctech" level="INFO" />
+    <logger name="org.apache.kafka" level="OFF"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.netflix" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="org.mongodb.driver" level="INFO"/>
+    <logger name="com.ulisesbocchio.jasyptspringboot" level="INFO" />
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DEBUG-FILE" />
+        <appender-ref ref="INFO-FILE" />
+        <appender-ref ref="WARN-FILE" />
+        <appender-ref ref="ERROR-FILE" />
+        <!--<appender-ref ref="ALL-FILE" />-->
+    </root>
+</configuration>
