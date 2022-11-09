@@ -10,7 +10,8 @@ public class ClassForNameUtils {
     public static void main(String[] args) {
         try {
             Class clazz = Class.forName("com.xunce.common.utils.ClassForNameUtils");
-            Method method = clazz.getMethod("test", String.class);
+            Method method = clazz.getDeclaredMethod("test", String.class);
+            method.setAccessible(true);
             Object invoke = method.invoke(clazz.newInstance(), "120120");
             System.out.println(invoke);
         } catch (ClassNotFoundException e) {
