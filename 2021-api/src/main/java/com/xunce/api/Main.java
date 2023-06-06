@@ -37,7 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
-    /**
+    /**just
      * 在内层循环里面调用continue（或者break）后接着retry标识符，程序直接转到最外层for循环去处理了
      * url：https://www.cnblogs.com/captainad/p/10931314.html#:~:text=%E7%BD%91%E4%B8%8A%E6%BA%9C%E8%BE%BE%E4%B8%80%E7%95%AA%E5%8F%91%E7%8E%B0,%E7%9C%8B%E7%9C%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9A
      */
