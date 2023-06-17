@@ -64,7 +64,7 @@ public class OptionalCase {
         user.setName("向向");
         user.setAge(27);
         user.setSex("男");
-//        user.setAddress(address);
+        user.setAddress(address);
 
         return user;
     }

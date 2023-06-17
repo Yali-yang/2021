@@ -19,6 +19,13 @@ public class PairCase {
             System.out.println(pair.getRight());
         }
 
+
+        System.out.println("--------------------这是一个分割线--------------------");
+
+
+        Pair<Boolean, String> and = and(Pair.of(true, ""), Pair.of(true, "名字不能为空"), Pair.of(false, "年龄不能为空"));
+        System.out.println(and.getRight());
+
     }
 
 
@@ -45,6 +52,24 @@ public class PairCase {
             } else {
                 return currentChecker.get();
             }
+        });
+    }
+
+    /**
+     * 对上面的优化，可以不使用Supplier
+     * @param checkerArr
+     * @return
+     */
+    public static Pair<Boolean, String> and(Pair<Boolean, String>... checkerArr){
+        if(ArrayUtils.isEmpty(checkerArr) || Arrays.stream(checkerArr).anyMatch(Objects::isNull)){
+            throw new IllegalArgumentException("参数不能为空");
+        }
+
+        return Arrays.stream(checkerArr).reduce(SUCCESS_RESULT, (accChecker, currChecker) -> {
+            if (!accChecker.getLeft()) {
+                return accChecker;
+            }
+            return currChecker;
         });
     }
 
