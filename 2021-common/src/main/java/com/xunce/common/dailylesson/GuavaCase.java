@@ -3,6 +3,7 @@ package com.xunce.common.dailylesson;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.*;
 import com.google.common.io.Files;
 import com.google.common.primitives.Ints;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class GuavaCase {
 
@@ -59,6 +61,15 @@ public class GuavaCase {
         list2.sort((x, y) -> -Ints.compare(x, y));
 
         System.out.println();
+
+        // 计算代码运行时间
+        Stopwatch started = Stopwatch.createStarted();
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long time = started.elapsed(TimeUnit.MILLISECONDS);
     }
 
 
