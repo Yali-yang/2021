@@ -3,6 +3,7 @@ package com.xunce.common.dailylesson;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,6 +13,10 @@ public class PairCase {
     public static final Pair<Boolean, String> SUCCESS_RESULT = Pair.of(true, StringUtils.EMPTY);
 
     public static void main(String[] args) {
+        Triple<Boolean, String, Integer> triple = Triple.of(false, "", 1);
+        Boolean left = triple.getLeft();
+        String middle = triple.getMiddle();
+        Integer right = triple.getRight();
 
         Supplier<Pair<Boolean, String>> supplier = and(() -> Pair.of(true, ""), () -> Pair.of(false, "名称不能为空"));
         Pair<Boolean, String> pair = supplier.get();

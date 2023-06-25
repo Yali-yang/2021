@@ -2,7 +2,6 @@ package com.xunce.common.dailylesson;
 
 import com.google.common.base.Strings;
 import lombok.Data;
-
 import java.util.Optional;
 
 public class OptionalCase {
@@ -15,7 +14,7 @@ public class OptionalCase {
                 .map(Address::getCountry)
                 .map(Country::getCityName);
 
-        // 如果不判断是否为空，直接去get，会报NoSuchElementException
+        // 如果不判断是否为空，直接去get，为空的话会报NoSuchElementException
 //        String s1 = optional.get();
 
         // 如果为空，那么获取的就是上海的值

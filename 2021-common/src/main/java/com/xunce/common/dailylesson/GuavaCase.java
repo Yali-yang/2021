@@ -1,15 +1,9 @@
 package com.xunce.common.dailylesson;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.base.Stopwatch;
+import com.google.common.base.*;
 import com.google.common.collect.*;
-import com.google.common.io.Files;
 import com.google.common.primitives.Ints;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class GuavaCase {
 
     public static void main(String[] args) throws Exception {
+        Preconditions.checkArgument(true, "%s不能为空", "Argument");
+        Preconditions.checkState(false, "%s不能为空", "State");
         // 创建不可变的集合
         ImmutableList<String> list = ImmutableList.of("v1", "v2");
         ImmutableSet<String> set = ImmutableSet.of("v1", "v2");
