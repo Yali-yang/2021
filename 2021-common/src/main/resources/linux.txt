@@ -1,0 +1,6 @@
+1：grep使用
+grep -A 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键信息，一并查询出后10行
+grep -B 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键信息，一并查询出前10行
+grep -C 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键信息，一并查询出前后10行
+cat hello.txt | grep -ni yes  // 先查询hello.txt文件，然后在查询出来的结果集查询有没有yes字符，并显示行号 -n:现实行号 -i:不区分大小写
+find /home -name hello.txt // 查找home目录下有没有hello.txt文件
