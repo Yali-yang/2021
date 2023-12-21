@@ -25,10 +25,10 @@ public class Client {
             futureResultArray[index.getAndIncrement()] = completableFuture;
         });
 
-//        TimeUnit.MILLISECONDS.sleep(100); // 如果不睡，那么CompletableFuture可能没填满，
-        CompletableFuture.allOf(futureResultArray).whenComplete((x, y) -> {
-            System.out.println("任务全部执行完了");
-        });
+        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(futureResultArray);
+//
+        voidCompletableFuture.join(); // 加了这个就会等所有的future执行完，main才会继续执行，不加main会继续往下面走
+
         System.out.println("开始看数据");
         Arrays.stream(futureResultArray).forEach(t -> {
             try {
