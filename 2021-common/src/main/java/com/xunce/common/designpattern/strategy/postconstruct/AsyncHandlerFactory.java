@@ -45,5 +45,11 @@ public class AsyncHandlerFactory {
         handler.handle(data);
     }
 
+    // 如果用spring，这么注册
+//    @Override
+//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+//        Map<String, IFileStrategy> tmepMap = applicationContext.getBeansOfType(IFileStrategy.class);
+//        tmepMap.values().forEach(strategyService -> iFileStrategyMap.put(strategyService.gainFileType(), strategyService));
+//    }
 }
 
