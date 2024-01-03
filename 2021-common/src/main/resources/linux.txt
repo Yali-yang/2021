@@ -3,5 +3,9 @@ grep -A 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键
 grep -B 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键信息，一并查询出前10行
 grep -C 10 '业主银行卡账户' all.log  // 查询业主银行卡账户关键信息，一并查询出前后10行
 grep -E "TID:31165-172.17.0.1-286-1697442691949-67.*收到消息" all.log   // 查询包含traceId和“收到消息”的行，-E：正则
+grep "填充last_paid_time字段" all.log | tail -n 1  // 先查询所有匹配的字符，然后只显示最后的一行
+grep "填充last_paid_time字段" all.log | head -n 1  // 先查询所有匹配的字符，然后只显示开始的一行
+grep -v "#" all.log // -v反转，输出不带#的行。不输出匹配的项，做相反的事，打印出所有不匹配的项
+grep -w "RUNNING" all.log // 精确匹配，必须有RUNNING这个单独的单词，而不是出现这个单词就行
 cat hello.txt | grep -ni yes  // 先查询hello.txt文件，然后在查询出来的结果集查询有没有yes字符，并显示行号 -n:现实行号 -i:不区分大小写
 find /home -name hello.txt // 查找home目录下有没有hello.txt文件
