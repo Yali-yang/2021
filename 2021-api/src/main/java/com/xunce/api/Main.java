@@ -21,6 +21,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.poi.hpsf.ReadingNotSupportedException;
 import org.junit.Test;
 
@@ -28,6 +31,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.*;
 import java.io.File;
 import java.util.concurrent.*;
@@ -37,6 +42,33 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class Main {
+
+    /**
+     * 循环去删除list中的元素，通过Iterator
+     */
+    @Test
+    public void testIterator() {
+        List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
+        Iterator<Integer> iterator = list.iterator();
+        while(iterator.hasNext()){
+            Integer next = iterator.next();
+            if(next == 2){
+                iterator.remove();// 这样操作之后，list中==2的元素就被删除了
+            }
+            System.out.println(next);
+        }
+        System.out.println();
+
+        for (Integer integer : list) {
+            if(integer == 1){
+//                list.remove(integer); // throw ConcurrentModificationException，循环中不能删除元素
+                list.add(7); // throw ConcurrentModificationException，循环中不能增加元素
+                list.set(0, 7); // 可以修改元素，不会报错
+            }
+        }
+        System.out.println();
+    }
+
 
     /**
      * 单链表反转
