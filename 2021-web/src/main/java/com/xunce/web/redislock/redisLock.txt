@@ -1,0 +1,17 @@
+一：应入jar包
+<dependency>
+    <groupId>org.redisson</groupId>
+    <artifactId>redisson-spring-boot-starter</artifactId>
+    <version>3.17.7</version>
+</dependency>
+
+二：配置yml
+spring:
+  redis:
+    host: m10043.mars.test.redis.ljnode.com
+    port: 10043
+    password: 61ceB83bfd
+
+三：怎么用，直接应入就可以了
+@Resource
+private RedissonClient defaultRedissonClient;
