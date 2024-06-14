@@ -6,3 +6,8 @@ logging:
     max-history: 30
     max-size: 30MB
   path: logs/
+spring:
+  redis:
+    host: m10043.mars.test.redis.ljnode.com
+    port: 10043
+    password: 61ceB83bfd
