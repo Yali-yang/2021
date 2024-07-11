@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 @Component
 @Slf4j
 public class CommonExpressionParser {
-//	@Autowired
+//	@Resource
 //	private ExpressionParser expressionParser;
 //
 //	@Autowired
