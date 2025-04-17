@@ -8,9 +8,9 @@
 二：配置yml
 spring:
   redis:
-    host: m10043.mars.test.redis.ljnode.com
-    port: 10043
-    password: 61ceB83bfd
+    host:
+    port:
+    password:
 
 三：怎么用，直接应入就可以了
 @Resource
